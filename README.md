@@ -1,96 +1,67 @@
-# Team Project
+# Project: Credit Risk Prediction
 
-## Description
-The team project consists of two modules. Each module requires participants to apply the skills they have learned to date, and explore a dataset of their choosing. The first part of the team project involves creating a simple program with a database in order to analyze a dataset from an open source, such as Kaggle. In the second part of the team project, teams will come together again and apply the skills developed in each of the data science or machine learning foundations certificate streams. Teams will either create a data visualization or a machine learning model.
+## 1. Project Definition and Objective
 
-Participants will work in assigned teams of 4-5. 
+**Objective:** Develop a machine learning model to predict the likelihood of a loan applicant defaulting.
 
-#### Project Descriptions
+**Goal:** Create a robust model to help financial institutions assess the risk associated with granting loans.
 
-* [First Team Project Description](./team_project_1.md)
-* [Second Team Project Description](./team_project_2.md)
+## 2. Main Question
 
-## Learning Outcomes
-By the end of Team Project Module 1, participants will be able to:
-* Resolve merge conflicts
-* Describe common problems or challenges a team encounters when working collaboratively using Git and GitHub
-* Create a program to analyze a dataset with contributions from multiple team members
+**What factors contribute to the likelihood of a borrower defaulting on a loan?**
 
-By the end of Team Project Module 2, participants will be able to:
-* Create a data visualization as a team
-* Create a machine learning model as a team
+### Supporting Questions
 
-### Contacts
-**Questions can be submitted to the _#cohort-3-help_ channel on Slack**
+#### Demographic Factors
+- How do age and income levels influence the probability of loan default?
 
-* Technical Facilitator: 
-  * **Phil Van-Lane**(he/him)
-  phil.vanlane@mail.utoronto.ca
+#### Employment and Home Ownership
+- Does the length of employment or type of home ownership (e.g., rent vs. own) correlate with loan default rates?
 
-* Learning Support Staff:
-  * **Taneea Agrawaal** (she/her)
-  taneea@cs.toronto.edu
-  * **Farzaneh Hashemi** (she/her )
-  fhashemi.ma@gmail.com
-  * **Tong Su** (she/her)
-  tong.su@mail.utoronto.ca
+#### Loan Characteristics
+- How do different loan characteristics such as loan amount, interest rate, and loan grade affect the likelihood of default?
 
-### Delivery of Team Project Modules
+#### Credit History
+- What is the impact of credit history length and the presence of defaults on file on the loan default probability?
 
-Each Team Project module will include two live learning sessions and one case study presentation. During live learning sessions, facilitators will introduce the project, walk through relevant examples, and introduce various team skills that support project success. The remaining time will be used for teams to assemble and work on their projects, as well as get help from the facilitator or the learning support to troubleshoot any issues a team may be encountering. 
+#### Loan Intent
+- Are certain loan intents (e.g., debt consolidation, home improvement) more associated with higher default rates?
 
-Work periods will also be used as opportunities for teams to collaborate and work together, while accessing learning support. 
+### Objectives
 
-### Schedule
+#### Identify Key Factors
+- Determine the key features that are most indicative of a borrower’s likelihood to default on a loan.
 
-|Day 1|Day 2|Day 3|Day 4|Day 5|
-|-----|-----|-----|-----|-----|
-|Live Learning Session |Live Learning Session|Case Study|Work Period|Work Period|
+#### Feature Relationships
+- Analyze relationships between different features and their impact on loan default probability.
 
-## Requirements
-* Participants are expected to attend live learning sessions and the case study as part of the learning experience. Participants are encouraged to use the scheduled work period time to complete their projects.
-* Participants are encouraged to ask questions and collaborate with others to enhance learning.
-* Participants must have a computer and an internet connection to participate in online activities.
-* Participants must not use generative AI such as ChatGPT to generate code to complete assignments. It should be used as a supportive tool to seek out answers to questions you may have.
-* We expect participants to have completed the [onboarding repo](https://github.com/UofT-DSI/onboarding/tree/main/onboarding_documents).
-* We encourage participants to default to having their camera on at all times, and turning the camera off only as needed. This will greatly enhance the learning experience for all participants and provides real-time feedback for the instructional team. 
+#### Predictive Modeling
+- Build a predictive model that can accurately predict whether a borrower will default on a loan based on their profile and loan characteristics.
 
-### How to get help
-![image](/steps-to-ask-for-help.png)
+#### Insights for Financial Institutions
+- Provide actionable insights for financial institutions to improve their credit risk assessment processes.
 
-## Folder Structure
+## 3. Data Collection
 
-### Project 1
-```markdown
-|-- data
-|---- processed
-|---- raw
-|---- sql
-|-- reports
-|-- src
-|-- README.md
-|-- .gitignore
-```
+**Source:** [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
 
-### Project 2
-```markdown
-|-- data
-|---- processed
-|---- raw
-|---- sql
-|-- experiments
-|-- models
-|-- reports
-|-- src
-|-- README.md
-|-- .gitignore
-```
+| Feature Name                 | Description                      |
+|------------------------------|----------------------------------|
+| `person_age`                 | Age                              |
+| `person_income`              | Annual Income                    |
+| `person_home_ownership`      | Home ownership                   |
+| `person_emp_length`          | Employment length (in years)     |
+| `loan_intent`                | Loan intent                      |
+| `loan_grade`                 | Loan grade                       |
+| `loan_amnt`                  | Loan amount                      |
+| `loan_int_rate`              | Interest rate                    |
+| `loan_status`                | Loan status (0 is non default 1 is default) |
+| `loan_percent_income`        | Percent income                   |
+| `cb_person_default_on_file`  | Historical default               |
+| `cb_person_cred_hist_length` | Credit history length            |
 
-* **Data:** Contains the raw, processed and final data. For any data living in a database, make sure to export the tables out into the `sql` folder, so it can be used by anyone else.
-* **Experiments:** A folder for experiments
-* **Models:** A folder containing trained models or model predictions
-* **Reports:** Generated HTML, PDF etc. of your report
-* **src:** Project source code
-* README: This file!
-* .gitignore: Files to exclude from this folder, specified by the Technical Facilitator
+## 4. Exploratory Data Analysis (EDA)
 
+- **Visualizations:** Analyze distributions of borrower characteristics, loan amounts, and outcomes.
+- **Statistics:** Compute summary statistics for numeric and categorical features.
+- **Correlation Analysis:** Check the correlation between different features and the target variable (default).
