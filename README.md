@@ -1,4 +1,42 @@
 # Project: Credit Risk Prediction
+## Folder Structure
+
+|-- project
+
+|---- notebooks
+
+|------ data_preparation.ipynb
+
+|------ exploratory_analysis.ipynb
+
+|------ model_training.ipynb
+
+|---- saves 
+
+|---- tests
+
+|---- README.md
+
+|---- data
+
+|------ processed
+
+|-------- processed_credit_risk_dataset.csv
+
+|------ raw
+
+|-------- credit_risk_dataset.csv
+
+|------ sql
+
+|-- reports
+
+|-- src
+
+|-- README.md
+
+|-- .gitignore
+
 
 ## 1. Project Definition and Objective
 
