@@ -450,7 +450,7 @@ For more details and the complete code, refer to the notebook `model_training.ip
 
 1. [**Nestor Rojas**](https://youtu.be/iZWeZNim6cE)
 2. [**Andriana Olashyn**](https://youtu.be/GpnisgeQ_50?si=-YaykzW35M8FLgl9)
-3. [**Oleksandr Bratushchyk-Khoma**]()
+3. [**Oleksandr Bratushchyk-Khoma**](https://youtu.be/W3-mOhDjcnE)
 4. [**Veronika Plosnak**]()
 
 
