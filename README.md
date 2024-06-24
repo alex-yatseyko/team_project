@@ -29,6 +29,8 @@
 
 |------ sql
 
+|-------- processed_credit_risk_dataset.db
+
 |-- reports
 
 |-- src
@@ -97,6 +99,22 @@
 ## 5. Data Collection
 
 **Source:** [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
+
+Dataset was chosen based on strict criteria:
+
+- Relevance: Dataset included various different features which can affect the loan status.
+
+- Completeness: Carefully filled out missing values in data.
+
+- Format: Preferred CSV for compatibility. 
+
+- Preprocessing: Used 1-hot encoding for categorical data. 
+
+- Balance: Applied stratify paramiter for balanced training and testing sets. 
+
+- Algorithms: random forest, decision tree, logistic regression with increased iterations and KNN. 
+
+- Evaluation: Assessed with  Precision, Recall, and F1 score due to data imbalance.
 
 | Feature Name                 | Description                      |
 |------------------------------|----------------------------------|
