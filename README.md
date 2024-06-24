@@ -1,12 +1,84 @@
 # Project: Credit Risk Prediction
+## 1. Folder Structure
 
-## 1. Project Definition and Objective
+|-- project
+
+|---- notebooks
+
+|------ data_preparation.ipynb
+
+|------ exploratory_analysis.ipynb
+
+|------ model_training.ipynb
+
+|---- saves 
+
+|---- tests
+
+|---- data
+
+|------ processed
+
+|-------- processed_credit_risk_dataset.csv
+
+|------ raw
+
+|-------- credit_risk_dataset.csv
+
+|------ sql
+
+|-------- processed_credit_risk_dataset.db
+
+|-- reports
+
+|-- src
+
+|-- README.md
+
+|-- README_dsi.md
+
+|-- .gitignore
+
+
+- Data: Contains the raw, processed and sql data.
+
+- Project: A folder for project files.
+
+- Notebooks: A folder with notebooks we used: data_preparation.ipynb, exploratory_analysis.ipynb, model_training.ipynb.
+
+- Reports: Generated HTML, PDF etc.
+
+- src: Project source code.
+
+- README: This file.
+
+- README_dsi.md: Old README file.
+
+- .gitignore: Files to exclude from this folder, specified by the Technical Facilitator
+
+
+## 2. Project Definition and Objective
 
 **Objective:** Develop a machine learning model to predict the likelihood of a loan applicant defaulting.
 
 **Goal:** Create a robust model to help financial institutions assess the risk associated with granting loans.
 
-## 2. Main Question
+
+
+## 3. Rules of Engagement 
+
+- Treat everyone with respect
+
+- Assume positive intent, and then assume nothing else
+
+- State views and ask genuine questions
+
+- Celebrate each other's accomplishments
+
+- Make mistakes
+
+
+## 4. Main Question
 
 **What factors contribute to the likelihood of a borrower defaulting on a loan?**
 
@@ -41,9 +113,25 @@
 #### Insights for Financial Institutions
 - Provide actionable insights for financial institutions to improve their credit risk assessment processes.
 
-## 3. Data Collection
+## 5. Data Collection
 
 **Source:** [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
+
+Dataset was chosen based on strict criteria:
+
+- Relevance: Dataset included various different features which can affect the loan status.
+
+- Completeness: Carefully filled out missing values in data.
+
+- Format: Preferred CSV for compatibility. 
+
+- Preprocessing: Used 1-hot encoding for categorical data. 
+
+- Balance: Applied stratify paramiter for balanced training and testing sets. 
+
+- Algorithms: random forest, decision tree, logistic regression with increased iterations and KNN. 
+
+- Evaluation: Assessed with  Precision, Recall, and F1 score due to data imbalance.
 
 | Feature Name                 | Description                      |
 |------------------------------|----------------------------------|
@@ -60,7 +148,7 @@
 | `cb_person_default_on_file`  | Historical default               |
 | `cb_person_cred_hist_length` | Credit history length            |
 
-## 4. Exploratory Data Analysis (EDA)
+## 6. Exploratory Data Analysis (EDA)
 
 ### Data Overview
 
