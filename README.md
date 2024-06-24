@@ -1,5 +1,5 @@
 # Project: Credit Risk Prediction
-## Folder Structure
+## 1. Folder Structure
 
 |-- project
 
@@ -38,13 +38,28 @@
 |-- .gitignore
 
 
-## 1. Project Definition and Objective
+## 2. Project Definition and Objective
 
 **Objective:** Develop a machine learning model to predict the likelihood of a loan applicant defaulting.
 
 **Goal:** Create a robust model to help financial institutions assess the risk associated with granting loans.
 
-## 2. Main Question
+
+
+## 3. Rules of Engagement 
+
+- Treat everyone with respect
+
+- Assume positive intent, and then assume nothing else
+
+- State views and ask genuine questions
+
+- Celebrate each other's accomplishments
+
+- Make mistakes
+
+
+## 4. Main Question
 
 **What factors contribute to the likelihood of a borrower defaulting on a loan?**
 
@@ -79,7 +94,7 @@
 #### Insights for Financial Institutions
 - Provide actionable insights for financial institutions to improve their credit risk assessment processes.
 
-## 3. Data Collection
+## 5. Data Collection
 
 **Source:** [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
 
@@ -98,7 +113,7 @@
 | `cb_person_default_on_file`  | Historical default               |
 | `cb_person_cred_hist_length` | Credit history length            |
 
-## 4. Exploratory Data Analysis (EDA)
+## 6. Exploratory Data Analysis (EDA)
 
 ### Data Overview
 
