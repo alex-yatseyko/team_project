@@ -15,8 +15,6 @@
 
 |---- tests
 
-|---- README.md
-
 |---- data
 
 |------ processed
@@ -37,7 +35,26 @@
 
 |-- README.md
 
+|-- README_dsi.md
+
 |-- .gitignore
+
+
+- Data: Contains the raw, processed and sql data.
+
+- Project: A folder for project files.
+
+- Notebooks: A folder with notebooks we used: data_preparation.ipynb, exploratory_analysis.ipynb, model_training.ipynb.
+
+- Reports: Generated HTML, PDF etc.
+
+- src: Project source code.
+
+- README: This file.
+
+- README_dsi.md: Old README file.
+
+- .gitignore: Files to exclude from this folder, specified by the Technical Facilitator
 
 
 ## 2. Project Definition and Objective
