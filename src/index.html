@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction</title>
+</head>
+
+<body>
+    <h1>Loan Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="person_age">Age:</label>
+        <input type="number" id="person_age" name="person_age"><br><br>
+        <label for="person_income">Income:</label>
+        <input type="number" id="person_income" name="person_income"><br><br>
+        <label for="person_emp_length">Employment Length:</label>
+        <input type="number" id="person_emp_length" name="person_emp_length"><br><br>
+        <label for="loan_amnt">Loan Amount:</label>
+        <input type="number" id="loan_amnt" name="loan_amnt"><br><br>
+        <label for="loan_int_rate">Interest Rate:</label>
+        <input type="number" step="0.01" id="loan_int_rate" name="loan_int_rate"><br><br>
+        <!-- Add other necessary input fields here -->
+        <input type="submit" value="Predict">
+    </form>
+</body>
+
+</html>
