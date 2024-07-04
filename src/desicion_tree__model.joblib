@@ -1,0 +1,23 @@
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+import joblib
+
+# Assuming your data is in a CSV file
+data = pd.read_csv("../project/data/processed/processed_credit_risk_dataset.csv")
+
+df = pd.DataFrame(data)
+
+# Features and target
+X = df.drop('loan_status', axis=1)
+y = df['loan_status']
+
+# Split the data into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train the Decision Tree model
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+# Save the trained model to a file
+joblib.dump(model, 'decision_tree_model.joblib')
