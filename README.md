@@ -1,228 +1,454 @@
-# Team Project
+# Project: Credit Risk Prediction
+## 1. Folder Structure
 
-### Video link
+|-- project
 
-Kristina Talalaievska: https://drive.google.com/file/d/1YpJATT5cnvVBbK1cX68f8Wd4FgXgr-7P/view?usp=share_link
+|---- notebooks
 
-### Description
+|------ data_preparation.ipynb
 
-The project aims to analyze a dataset to predict the likelihood of developing asthma based on known factors like age, gender, ethnicity, education level and diagnosis. By using this information, we built a model to accurately forecast the risk of asthma. This predictive tool is vital for for helping in better management of the disease. Our team employed two machine learning techniques for this analysis: KNN and logistic regression.
+|------ exploratory_analysis.ipynb
 
+|------ model_training.ipynb
 
-### Methodologies used:
- 1. KNN targets  to classify data points based on their proximity to other points in the dataset.
- 2. Logistic Regression aiming  to predicts the probability of asthma occurrence by modeling the relationship between the dependent variable (diagnosis)  and various independent variables (age, gender, ethnicity and education level).
+|---- saves 
 
- Rules of Engagement:
- 1. Transparent and clear communication within the team members.
- 2. Collaboration and teamwork.
- 3. Respect and professionalism in sharing different viewpoints and constructive feedbacks.
- 4. Identifying strong expertise of each team member to effectively contribute to the project.
- 5. Conducting team meetings and summarizing the key points for discussion on the common shared Google Doc.
- 6. Transparency in sharing ideas openly.
- 7. Supporting each other and clarifying if one of the team members has difficulties in understanding the project process.
- 8. Continuous improvement in developing the model.
+|---- tests
 
+|---- data
 
-### Video link
+|------ processed
 
-Yuanyuan (Caroline) Zhang: https://drive.google.com/file/d/1w6S_ISXUlIID1eEA0uiGH29YGZLqPq5u/view?usp=drive_link
+|-------- processed_credit_risk_dataset.csv
 
-### Description
+|------ raw
 
-Use KNN and logistic regression to predict the asthma diagnosis based on known factors, such as demographic details and life style factors.
+|-------- credit_risk_dataset.csv
 
+|------ sql
 
-### Steps to analyse the dataset
+|-------- processed_credit_risk_dataset.db
 
-1. load the dataset
-   
-2. observe and describe the dataset
+|-- reports
 
-3. preprocess data
-   
-1> drop unnecessary columns
+|-- src
 
-2> analyze and convert categorical value
-how do we process both numerical and categorical predictor values at the same time?
-when do we neeed to standardize the predictor values?
-most categorical value is coded as binary 0 or 1. two values are assigned integer 0 to 3, 'ethnicity' is not ordinal, 'education level' is ordinal.
-- need to convert 4 'ethnicity' values to 4 binary columns
-- education level: 4 values are ordinal, they can stay
-- other binary data can stay as 0 and 1
+|-- README.md
 
-4. split datasets into separate training and testing datasets
+|-- README_dsi.md
 
-5. standardize the data/ feature scaling
+|-- .gitignore
 
-6. fit knn model, using k = square root of n in testing dataset
 
-7. check the prediction accuracy, use confusion matrix/table
+- Data: Contains the raw, processed and sql data.
 
+- Project: A folder for project files.
 
-### Interpretation of the analysis:
-### Imbalanced dataset:
-The model cannot predict posistve diagnosis, even thouth the accuracy is high at 95%, mostly due to the predicted result are all negative.
+- Notebooks: A folder with notebooks we used: data_preparation.ipynb, exploratory_analysis.ipynb, model_training.ipynb.
 
-### Reasons:
-It seesm the dataset is imbalanced where there are 124 positive diagnosis of Asthma out of the entire 2400 records.The corelations between predictor variables and target variable are not strong, there is no correlation above 0.1, while the strongest corelation is Exercise Included at 0.05, the 2nd strong correlation is with Chest Tightnesss (0.04), followed by Lung Function FVC (0.030), Wheezing (0.027), Dust Exposure (0.026), Coughing (0.024),Lun Function FEV1 (0.023), Nightime Symptoms (0.021) as well as Ethnicity_3 (0.022). (refere to below table for Correlation to related factors from the analysis)
+- Reports: Generated HTML, PDF etc.
 
-### Solution:
-I was tring to solve the imbalanced dataset by increasing the traing set from 80% to 90% (or even tried 95%). The result still does not make any imporvement on predicting positve diagnosis. Maybe there are better ways to solve the issue. But due to the time limit of this project, I will deal with it at a later time. Or maybe we can find a better dataset to work on for the next project.
+- src: Project source code.
 
-### Correlations analysis
+- README: This file.
 
-Most important factor:
-Among all the predictor values, Exercise Induced variable has the strongest correlation with the diagnosis. Exercise-induced asthma is when the airways narrow or squeeze during hard physical activity. It causes shortness of breath, wheezing, coughing, and other symptoms during or after exercise. (reference: https://www.mayoclinic.org/diseases-conditions/exercise-induced-asthma/symptoms-causes/syc-20372300). This shows that exercise seems to be a contributing factor to induce Asthma.
+- README_dsi.md: Old README file.
 
-Other related factors:
-Most of the related factors are symptom related, such as Gastroesophageal Reflux, Wheezing, Chset Tightness, Couphing, Nighttime Symptoms. Some related factores are based on medical exams, such as Lung function FEV1 and Lung Function FVC.
+- .gitignore: Files to exclude from this folder, specified by the Technical Facilitator
 
-Demographic factors:
-Demographic details have lower correlations (below 0.02) to the diagnosis (Age has a 0.015 correlation, Gender has little correlation at 0.003), except that Ethnicity_3 has a stronger correlation 0.022. We need the interpretations on what the Ethnicity_3 entails, as this indicates the Ethnicity value equals 3 from the orignial dataset. Once we know what Ethnicity 3 represents, we would have a better idea about the analysis.
 
-Education and lifestyle factors:
-We also understands that the educaiton level or lifestyle factors (BMI, Physical Activity, Diet Quality, Pollution Exposure), have little correlations (below 0.02) to the diagnosis,  except that Dust Exposure has a relatively stronger correlation 0.026, Smoking has a slightly strong correlation 0.019, followed by Sleep Quality at 0.018, Pollen Exposure at 0.015.
+## 2. Project Definition and Objective
 
-Medical symptons and history:
-Some medical symptoms or medical history, such as Family History of Asthma, History of Allergies, Eczema, seem to have little correlation on the diagnosis, except that Hay Fever has a slightly strong correlation 0.019, followed by shortness of breath at 0.015, Pet Allergy at 0.013.
+**Objective:** Develop a machine learning model to predict the likelihood of a loan applicant defaulting.
 
+**Goal:** Create a robust model to help financial institutions assess the risk associated with granting loans.
 
-#### Correlations to related factors from the analysis:
 
-DustExposure              0.025972
-GastroesophagealReflux    0.022770
-LungFunctionFEV1          0.023336
-LungFunctionFVC           0.029629
-Wheezing                  0.027197
-ChestTightness            0.039278
-Coughing                  0.024193
-NighttimeSymptoms         0.021965
-ExerciseInduced           0.053956
-Ethnicity_3               0.022309
 
-#### Correlations to other factors from the analysis:
+## 3. Rules of Engagement 
 
-Age                    0.015111
-Gender                 0.003128
-EducationLevel         0.008185
-BMI                    0.012522
-Smoking                0.019321
-PhysicalActivity       0.005066
-DietQuality            0.003149
-SleepQuality           0.018022
-PollutionExposure      0.004535
-PollenExposure         0.015099
-PetAllergy             0.013078
-FamilyHistoryAsthma    0.001334
-HistoryOfAllergies     0.001951
-Eczema                 0.008592
-HayFever               0.019141
-ShortnessOfBreath      0.015281
-Ethnicity_0            0.011398
-Ethnicity_1            0.001778
-Ethnicity_2            0.005584
-Name: Diagnosis, dtype: float64
+- Treat everyone with respect
 
+- Assume positive intent, and then assume nothing else
 
+- State views and ask genuine questions
 
+- Celebrate each other's accomplishments
 
-## Video Link:
-Jinrong Liu: https://vimeo.com/965691090
+- Make mistakes
 
 
-## Project Objective
+## 4. Main Question
 
-Our project focuses on analyzing Asthma based on a dataset of Patient ID, Demographic details, lifestyle factors, environmental and allergy factors, Medical history, Clinical Measurements, Symptoms, Diagnosis information, and Confidential information. The goal of the analysis is to understand how the factors affect Asthma. Therefore, we select Diagnosis as a dependent variable, and others are regarded as independent variables. 
+**What factors contribute to the likelihood of a borrower defaulting on a loan?**
 
-Before working on the project, we made our team's Rules of Engagement. The details are summarized below:
-1. Everyone needs to take time to participate in the meeting and discussion;
-2. Everyone is free to share ideas, questions, and improvements on Google doc;
-3. Transparent and clear communication among the team members;
-4. Everyone needs to make a commitment to complete the team project;
-5. We are always welcoming any developments and suggestions, and everyone is responsible for these developments and improvements during the working period;
-5. Everyone needs to engage each allocation and be able to fully complete all allocation works.
+### Supporting Questions
 
-## Project Process
+#### Demographic Factors
+- How do age and income levels influence the probability of loan default?
 
-Our team wanted to know which model or models fit the dataset, so we used different models to test the dataset. For my part, I used a Multilinear regression model. The model failed as I got the negative number of R-squared. After a discussion with team members, I realized the big mistake was because the dataset was based on classification rather than numbers. Thus, I am continuing to use the model that fits for classification. I tested the three models: Random Forest, SVM(Support Vector Machine), and KNN (K-Nearest Neighbors).
+#### Employment and Home Ownership
+- Does the length of employment or type of home ownership (e.g., rent vs. own) correlate with loan default rates?
 
-### Random Forest:
-I used the model of Random Forest to test how the model fits the dataset. However, I  did not achieve an excellent accuracy result. The accuracy rate of the model is 91.2317%. The overall result is good, but the model has an important disadvantage. The model is imbalancing as the F1-score is 0.95, and the supported data is 454 for class 0 (male); whereas there is only 0.09 of F1-score and the supported data is 25 for class 1 (female).
+#### Loan Characteristics
+- How do different loan characteristics such as loan amount, interest rate, and loan grade affect the likelihood of default?
 
-### SVM (Support Vector Machine):
-After realizing the Random Forest Model's shortcomings, I decided to use an SVM (Support Vector Machine). The overall result is evenly poorer than the first model. The F1 Score of the model is 0.68, and the supported data is 681 for class 0. For class 1, the F1 Score is 0.09, and the supported data is 37. Additionally, the ROC AUC Score of the model is 0.5281. In other words, the model is still not as good as we expected.
+#### Credit History
+- What is the impact of credit history length and the presence of defaults on file on the loan default probability?
 
-### K-Nearest Neighbors:
-Due to the limited time, I decided to try the final model- KNN, which i have leared from class. Surprisingly, the result is better than the first two models. The overall result is 94.0114%, and other factors (Mean, Standard deviation, quartiles) look good. As a result, I decided to use KNN to conduct the statistical analysis.
+#### Loan Intent
+- Are certain loan intents (e.g., debt consolidation, home improvement) more associated with higher default rates?
 
-## Project Analysis
+### Objectives
 
-PatientID:
-The PatientID ranges from 5034 to 7425, with a standard deviation suggesting a spread of IDs. All IDs are unique as the count matches the number of rows.
+#### Identify Key Factors
+- Determine the key features that are most indicative of a borrower’s likelihood to default on a loan.
 
-Age:
-The age of participants ranges from 5 to 79 years, with a mean age of approximately 42 years. This indicates a middle-aged adult population with a significant range, covering children to elderly.
+#### Feature Relationships
+- Analyze relationships between different features and their impact on loan default probability.
 
-Gender:
-Gender is coded as binary (0 and 1). The mean close to 0.49 suggests a near-even split between the two genders.
+#### Predictive Modeling
+- Build a predictive model that can accurately predict whether a borrower will default on a loan based on their profile and loan characteristics.
 
-Ethnicity:
-Encoded with values from 0 to 3, representing different ethnic groups. The maximum value of 3 and a mean of around 0.67 indicate a diversity of ethnic backgrounds, with potential skew towards specific groups.
+#### Insights for Financial Institutions
+- Provide actionable insights for financial institutions to improve their credit risk assessment processes.
 
-Education Level:
-Values range from 0 to 3, which might represent increasing levels of educational attainment. The data skews towards higher education levels, with a mean around 1.31.
+## 5. Data Collection
 
-BMI:
-Body Mass Index (BMI) values range from 15.03 to 39.96, indicating a variety from underweight to obese categories. The mean BMI is about 27, which is classified as overweight.
+**Source:** [Kaggle Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
 
-Smoking:
-This is likely a binary feature, with a mean close to 0.14 suggesting that a smaller proportion of the population are smokers.
+Dataset was chosen based on strict criteria:
 
-Physical Activity:
-Weekly hours spent in physical activity range from near 0 to about 10 hours, with a mean slightly over 5 hours. This might suggest moderate activity levels across the population.
+- Relevance: Dataset included various different features which can affect the loan status.
 
-Diet Quality:
-Diet quality scores range from 0 to 10, with a mean of around 5.02, indicating a moderate diet quality on average.
+- Completeness: Carefully filled out missing values in data.
 
-Sleep Quality:
-Sleep quality scores also range from about 4 to 10, with a higher mean of 7.09, suggesting generally good sleep quality among participants.
+- Format: Preferred CSV for compatibility. 
 
-Gastroesophageal Reflux:
-Appears to be a binary indicator (0 or 1), with a low mean (about 0.16), indicating that few participants suffer from this condition.
+- Preprocessing: Used 1-hot encoding for categorical data. 
 
-Lung Function (FEV1 and FVC):
-Both Forced Expiratory Volume in 1 second (FEV1) and Forced Vital Capacity (FVC) show a wide range in values, suggesting variability in lung function among the participants. The means (about 2.55 for FEV1 and 3.74 for FVC) along with their standard deviations (about 0.86 for FEV1 and 1.30 for FVC) indicate diverse respiratory health statuses.
+- Balance: Applied stratify paramiter for balanced training and testing sets. 
 
+- Algorithms: random forest, decision tree, logistic regression with increased iterations and KNN. 
 
-## Project Results
+- Evaluation: Assessed with  Precision, Recall, and F1 score due to data imbalance.
 
-Demographic Diversity:
-The dataset spans a wide age range from 5 to 79 years, with an average age around 42 years, indicating a diverse demographic that includes children, adults, and the elderly. The standard deviation in age suggests a broad representation across different life stages.
+| Feature Name                 | Description                      |
+|------------------------------|----------------------------------|
+| `person_age`                 | Age                              |
+| `person_income`              | Annual Income                    |
+| `person_home_ownership`      | Home ownership                   |
+| `person_emp_length`          | Employment length (in years)     |
+| `loan_intent`                | Loan intent                      |
+| `loan_grade`                 | Loan grade                       |
+| `loan_amnt`                  | Loan amount                      |
+| `loan_int_rate`              | Interest rate                    |
+| `loan_status`                | Loan status (0 is non-default, 1 is default) |
+| `loan_percent_income`        | Percent income                   |
+| `cb_person_default_on_file`  | Historical default               |
+| `cb_person_cred_hist_length` | Credit history length            |
 
-Gender Balance: 
-Gender distribution is nearly equal with a mean very close to 0.5, implying an almost even split between the two genders represented in the dataset. This balance allows for gender-comparative analyses without major adjustments for gender disparities.
+## 6. Exploratory Data Analysis (EDA)
 
-Ethnic and Educational Diversity: 
-The participants come from varied ethnic backgrounds with values ranging from 0 to 3, and the dataset shows a good mix, although with a slight skew towards lower numbered ethnic groups. Education levels vary from no formal education to higher education degrees, suggesting the dataset captures a wide socioeconomic spectrum.
+### Data Overview
 
-Health Metrics Variability:
-BMI values range significantly from underweight to obese categories, with a mean indicating the average participant is at the upper edge of the normal weight range. This variability, combined with a mean physical activity of about 5 hours a week and moderate scores in diet and sleep quality, underscores the potential to explore associations between lifestyle factors and health outcomes.
+The dataset contains 32,581 entries with 12 columns. Below is a summary of the dataset:
 
-Specific Health Concerns:
-A small proportion of the dataset indicates issues like smoking and gastroesophageal reflux, which could be critical for targeted health interventions.
+- **RangeIndex:** 32581 entries, 0 to 32580
+- **Data Columns:**
+  - `person_age`: 32581 non-null, int64
+  - `person_income`: 32581 non-null, int64
+  - `person_home_ownership`: 32581 non-null, object
+  - `person_emp_length`: 31686 non-null, float64
+  - `loan_intent`: 32581 non-null, object
+  - `loan_grade`: 32581 non-null, object
+  - `loan_amnt`: 32581 non-null, int64
+  - `loan_int_rate`: 29465 non-null, float64
+  - `loan_status`: 32581 non-null, int64
+  - `loan_percent_income`: 32581 non-null, float64
+  - `cb_person_default_on_file`: 32581 non-null, object
+  - `cb_person_cred_hist_length`: 32581 non-null, int64
 
-In summary, the dataset provides an adequent foundation for analyzing health and lifestyle correlations, demographic impacts on health, and the possiblity to find the best fit model in the future.
+### Summary Statistics
 
+| Column                       | Count       | Mean        | Std         | Min         | 25%         | 50%         | 75%         | Max         |
+|------------------------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|
+| person_age                   | 32581       | 27.7346     | 6.3481      | 20.0        | 23.0        | 26.0        | 30.0        | 144.0       |
+| person_income                | 32581       | 66074.85    | 61983.12    | 4000.0      | 38500.0     | 55000.0     | 79200.0     | 6000000.0   |
+| person_emp_length            | 31686       | 4.7897      | 4.1426      | 0.0         | 2.0         | 4.0         | 7.0         | 123.0       |
+| loan_amnt                    | 32581       | 9589.37     | 6322.09     | 500.0       | 5000.0      | 8000.0      | 12200.0     | 35000.0     |
+| loan_int_rate                | 29465       | 11.0117     | 3.2405      | 5.42        | 7.90        | 10.99       | 13.47       | 23.22       |
+| loan_status                  | 32581       | 0.2182      | 0.4130      | 0.0         | 0.0         | 0.0         | 0.0         | 1.0         |
+| loan_percent_income          | 32581       | 0.1702      | 0.1068      | 0.0         | 0.09        | 0.15        | 0.23        | 0.83        |
+| cb_person_cred_hist_length   | 32581       | 5.8042      | 4.0550      | 2.0         | 3.0         | 4.0         | 8.0         | 30.0        |
 
-## Video link
+### Understanding Skewness in Numerical Features
 
-Anna Zheng: https://drive.google.com/file/d/14VACegJThk3TINtBU4Y1W-bm6HeDQFIv/view?usp=drive_link
+The numerical features exhibit left skewness, where the majority of data points cluster towards lower values, with a tail extending towards higher values. This skewness can impact the model's ability to accurately describe typical cases. Typically occurring cases are more frequent in skewed datasets, whereas extreme cases are rare. Therefore, the model may prioritize accommodating rare occurrences at the expense of precision for more common scenarios.
 
-### Description
+For instance, determining a coefficient based on a thousand observations all within the range [0, 10] is likely more precise than for 990 observations in the same range and 10 observations ranging between [1,000, 1,000,000]. This imbalance can diminish the overall utility of your model.
 
-This project aims to analyze asthma data set and to use the dataset to train a model to predict if a patient has asthma. 
+### Benefits of Addressing Skewness
 
+Addressing skewness can yield several advantages. It makes data analysis that relies on approximately Normal distributions more feasible and informative. It also ensures that results are reported on a sensible scale, although the relevance of this depends on the specific context. Additionally, correcting skewness helps prevent skewed predictors from disproportionately influencing predicted classifications compared to other predictors.
 
-### Methodologies used:
-Split the data into training set and test set to train a KNN model and to view the accuracy score. Started with checking if the gender, age, education levels are skewed by data visualizing and then fit the model. The accuracy score is pretty satisfying with KNN.
+### Choosing a Transformation Approach
+
+When addressing left skewness in numerical features, a log transformation is often preferred over standard scaling methods like MinMaxScaler or StandardScaler. The log transformation effectively reduces the impact of extreme values and compresses the range, making the data more symmetrical and normally distributed. This approach is particularly useful for variables such as incomes, populations, and other data that typically exhibit a log-normal distribution.
+
+### Correlation Analysis
+
+#### Correlation Heat Map
+
+Here is the correlation matrix showing the relationships between different features:
+
+|                          | person_age | person_income | person_emp_length | loan_amnt | loan_int_rate | loan_status | loan_percent_income | cb_person_cred_hist_length |
+|--------------------------|------------|---------------|-------------------|-----------|---------------|-------------|---------------------|----------------------------|
+| person_age               | 1.000000   | 0.173202      | 0.163106          | 0.050787  | 0.012580      | -0.021629   | -0.042411           | 0.859133                   |
+| person_income            | 0.173202   | 1.000000      | 0.134268          | 0.266820  | 0.000792      | -0.144449   | -0.254471           | 0.117987                   |
+| person_emp_length        | 0.163106   | 0.134268      | 1.000000          | 0.113082  | -0.056405     | -0.082489   | -0.054111           | 0.144699                   |
+| loan_amnt                | 0.050787   | 0.266820      | 0.113082          | 1.000000  | 0.146813      | 0.105376    | 0.572612            | 0.041967                   |
+| loan_int_rate            | 0.012580   | 0.000792      | -0.056405         | 0.146813  | 1.000000      | 0.335133    | 0.120314            | 0.016696                   |
+| loan_status              | -0.021629  | -0.144449     | -0.082489         | 0.105376  | 0.335133      | 1.000000    | 0.379366            | -0.015529                  |
+| loan_percent_income      | -0.042411  | -0.254471     | -0.054111         | 0.572612  | 0.120314      | 0.379366    | 1.000000            | -0.031690                  |
+| cb_person_cred_hist_length | 0.859133  | 0.117987      | 0.144699          | 0.041967  | 0.016696      | -0.015529   | -0.031690           | 1.000000                   |
+
+### Key Insights from Data Analysis
+
+1. **Loan Interest Rate Missing Values:** The `loan_int_rate` feature contains missing values. These are addressed by imputing the missing values using a strategy based on the mean correlated with the target variable `loan_status`, where the correlation between `loan_int_rate` and `loan_status` is 0.34.
+
+2. **Credit History Length and Age:** There is a high correlation (0.86) between `cb_person_cred_hist_length` and `person_age`, indicating that older individuals tend to have longer credit histories.
+
+3. **Income and Loan Percent Income:** The `person_income` is negatively correlated (-0.25) with `loan_percent_income`, meaning higher income individuals tend to have a lower percentage of their income as loan amount.
+
+4. **Employment Length and Loan Amount:** The `person_emp_length` has a weak positive correlation (0.11) with `loan_amnt`, suggesting that individuals with longer employment lengths tend to take higher loan amounts.
+
+5. **Home Ownership Distribution:** The majority of loan applicants either rent (16,446) or have a mortgage (13,444), with fewer owning their homes outright (2,584) or having other forms of home ownership (107).
+
+### Distribution of Categorical Features
+
+#### Home Ownership
+
+| Home Ownership | Count  |
+|----------------|--------|
+| RENT           | 16446  |
+| MORTGAGE       | 13444  |
+| OWN            | 2584   |
+| OTHER          | 107    |
+
+#### Loan Intent
+
+| Loan Intent          | Count  |
+|----------------------|--------|
+| EDUCATION            | 6453   |
+| MEDICAL              | 6071   |
+| VENTURE              | 5719   |
+| PERSONAL             | 5521   |
+| DEBTCONSOLIDATION    | 5212   |
+| HOMEIMPROVEMENT      | 3605   |
+
+#### Loan Grade
+
+| Loan Grade | Count  |
+|------------|--------|
+| A          | 10777  |
+| B          | 10451  |
+| C          | 6458   |
+| D          | 3626   |
+| E          | 964    |
+| F          | 241    |
+| G          | 64     |
+
+#### Historical Default
+
+| Historical Default | Count  |
+|--------------------|--------|
+| N                  | 26836  |
+| Y                  | 5745   |
+
+## Data Preprocessing
+
+In the notebook `data_preparation.ipynb`, we prepare the data based on insights gained from the exploratory analysis (for details, see the notebook `exploratory_analysis`).
+
+### Missing Values
+
+Number of missing values per column:
+- `person_age`: 0
+- `person_income`: 0
+- `person_home_ownership`: 0
+- `person_emp_length`: 895
+- `loan_intent`: 0
+- `loan_grade`: 0
+- `loan_amnt`: 0
+- `loan_int_rate`: 3116
+- `loan_status`: 0
+- `loan_percent_income`: 0
+- `cb_person_default_on_file`: 0
+- `cb_person_cred_hist_length`: 0
+
+### Steps in Data Preprocessing
+
+1. **Imputation of Missing Values:**
+   - Impute missing `loan_int_rate` values based on `loan_status`.
+  ```
+    mean_loan_int_rate_0 = data[data['loan_status'] == 0]['loan_int_rate'].mean()
+    mean_loan_int_rate_1 = data[data['loan_status'] == 1]['loan_int_rate'].mean()
+    data.loc[(data['loan_status'] == 0) & (data['loan_int_rate'].isnull()), 'loan_int_rate'] = mean_loan_int_rate_0
+    data.loc[(data['loan_status'] == 1) & (data['loan_int_rate'].isnull()), 'loan_int_rate'] = mean_loan_int_rate_1
+  ```
+     
+   - Impute missing `person_emp_length` values based on the overall mean.
+     ```
+      mean_person_emp_length = data['person_emp_length'].mean()
+      data['person_emp_length'].fillna(mean_person_emp_length, inplace=True)
+     ```
+
+2. **One-Hot Encoding (OHE):**
+   One-Hot-Encoding is a technique used to represent categorical variables as numerical values in a machine learning model. The following steps are taken:
+   - Apply OHE to categorical columns with more than 2 categories (`loan_intent`, `loan_grade`, `person_home_ownership`).
+     ```
+       data = pd.get_dummies(data,columns=['loan_intent','loan_grade','person_home_ownership'])
+     ```
+   - Apply OHE to the categorical column with only 2 categories (`cb_person_default_on_file`), dropping the first category to avoid multicollinearity.
+     ```
+       data = pd.get_dummies(data,columns=['cb_person_default_on_file'], drop_first= True)
+     ```
+
+3. **Data Standardization:**
+   We preprocess numerical columns by removing outliers and applying log transformation based on insights from the exploratory data analysis.
+   - **Remove Outliers:** Identify and remove outliers to ensure a more normal distribution of data.
+     ```
+       column_no_outliers = data[column_name][data[column_name] < data[column_name].quantile(quantile)]
+     ```
+   - **Apply Log Transformation:** Apply log transformation to reduce skewness and make the data more normally distributed.
+     ```
+       column_log_transformed = np.log1p(column_no_outliers)
+     ```
+
+### Resulting Dataset
+
+The resulting dataset contains 32,581 entries and 26 columns, with the following structure:
+
+| Column                          | Non-Null Count | Dtype   |
+|---------------------------------|----------------|---------|
+| `person_age`                    | 32581          | float64 |
+| `person_income`                 | 32581          | float64 |
+| `person_emp_length`             | 32581          | float64 |
+| `loan_amnt`                     | 32581          | float64 |
+| `loan_int_rate`                 | 32581          | float64 |
+| `loan_status`                   | 32581          | int64   |
+| `loan_percent_income`           | 32581          | float64 |
+| `cb_person_cred_hist_length`    | 32581          | float64 |
+| `loan_intent_DEBTCONSOLIDATION` | 32581          | bool    |
+| `loan_intent_EDUCATION`         | 32581          | bool    |
+| `loan_intent_HOMEIMPROVEMENT`   | 32581          | bool    |
+| `loan_intent_MEDICAL`           | 32581          | bool    |
+| `loan_intent_PERSONAL`          | 32581          | bool    |
+| `loan_intent_VENTURE`           | 32581          | bool    |
+| `loan_grade_A`                  | 32581          | bool    |
+| `loan_grade_B`                  | 32581          | bool    |
+| `loan_grade_C`                  | 32581          | bool    |
+| `loan_grade_D`                  | 32581          | bool    |
+| `loan_grade_E`                  | 32581          | bool    |
+| `loan_grade_F`                  | 32581          | bool    |
+| `loan_grade_G`                  | 32581          | bool    |
+| `person_home_ownership_MORTGAGE`| 32581          | bool    |
+| `person_home_ownership_OTHER`   | 32581          | bool    |
+| `person_home_ownership_OWN`     | 32581          | bool    |
+| `person_home_ownership_RENT`    | 32581          | bool    |
+| `cb_person_default_on_file_Y`   | 32581          | bool    |
+
+The preprocessed dataset is saved as `processed_credit_risk_dataset.csv`.
+
+## Model Training
+
+In the notebook `model_training.ipynb`, we train various machine learning models to predict the likelihood of a loan applicant defaulting. The dataset used for training is the preprocessed dataset saved during the data preprocessing step.
+
+### Reading the Dataset
+
+We start by reading the preprocessed dataset.
+````
+data = pd.read_csv("../data/processed/processed_credit_risk_dataset.csv")
+````
+
+### Splitting the Data
+
+The data is split into training and testing sets. Stratified sampling is used to handle the imbalance in the target labels, ensuring that the proportion of default and non-default cases is consistent across both sets.
+
+```
+y = data['loan_status'].to_numpy()
+X = data.drop('loan_status',axis = 1).to_numpy()
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y, random_state= 42)
+```
+
+### Metrics and Scoring
+
+We define a function to evaluate our models using precision, recall, and F1-score metrics. These metrics provide a comprehensive view of the model's performance:
+```
+from sklearn.metrics import precision_recall_fscore_support
+y_pred = model.predict(X_test)
+    metrics = precision_recall_fscore_support(y_test, y_pred, pos_label=1, average='binary')
+    
+    print('Confusion matrix)\n', confusion_matrix(y_test, y_pred))
+    print('Precision is {:0.2f} %'.format(metrics[0]*100))
+    print('Recall is {:0.2f} %'.format(metrics[1]*100))
+    print('Fscore is {:0.2f} %'.format(metrics[2]*100))
+```
+
+- **Precision:** The proportion of true positive results among the total predicted positives.
+- **Recall:** The proportion of true positive results among the total actual positives.
+- **F1-Score:** The harmonic mean of precision and recall, balancing the two metrics.
+
+### Summary of Models Used
+
+We trained several models, including:
+
+- **Random Forest**
+- **Decision Tree**
+- **Logistic Regression** (with and without increased iterations)
+- **K-Nearest Neighbors (KNN)**
+
+#### Performance Metrics
+
+**Precision:**
+
+- **Random Forest:** 97.70%
+- **Decision Tree:** 95.77%
+- **Logistic Regression with increased iterations:** 76.17%
+- **Logistic Regression:** 65.41%
+- **KNN:** 54.82%
+
+The Random Forest model has the highest precision, closely followed by the Decision Tree model.
+
+**Recall:**
+
+- **Random Forest:** 73.94%
+- **Decision Tree:** 73.83%
+- **Logistic Regression with increased iterations:** 54.14%
+- **Logistic Regression:** 28.42%
+- **KNN:** 27.52%
+
+The Random Forest model also has the highest recall, indicating it has the lowest false negative rate.
+
+**F1-Score:**
+
+- **Random Forest:** 84.18%
+- **Decision Tree:** 83.38%
+- **Logistic Regression with increased iterations:** 63.29%
+- **Logistic Regression:** 39.62%
+- **KNN:** 36.64%
+
+The Random Forest model achieves the highest F1-Score, which balances precision and recall effectively.
+
+### Conclusion
+
+Based on the precision, recall, and F1-Score metrics, the Random Forest model performs the best in predicting loan defaults. This model strikes a good balance between identifying positive cases (defaults) and minimizing false positives.
+
+For more details and the complete code, refer to the notebook `model_training.ipynb`.
+
+### Team Videos
+
+1. [**Nestor Rojas**](https://youtu.be/iZWeZNim6cE)
+2. [**Andriana Olashyn**](https://youtu.be/GpnisgeQ_50?si=-YaykzW35M8FLgl9)
+3. [**Oleksandr Bratushchyk-Khoma**](https://youtu.be/W3-mOhDjcnE)
+4. [**Veronika Plosnak**](https://youtu.be/E3bTQjyBdrM)
