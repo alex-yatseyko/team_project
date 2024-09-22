@@ -288,167 +288,72 @@ Number of missing values per column:
 
 ### Steps in Data Preprocessing
 
-1. **Imputation of Missing Values:**
-   - Impute missing `loan_int_rate` values based on `loan_status`.
-  ```
-    mean_loan_int_rate_0 = data[data['loan_status'] == 0]['loan_int_rate'].mean()
-    mean_loan_int_rate_1 = data[data['loan_status'] == 1]['loan_int_rate'].mean()
-    data.loc[(data['loan_status'] == 0) & (data['loan_int_rate'].isnull()), 'loan_int_rate'] = mean_loan_int_rate_0
-    data.loc[(data['loan_status'] == 1) & (data['loan_int_rate'].isnull()), 'loan_int_rate'] = mean_loan_int_rate_1
-  ```
-     
-   - Impute missing `person_emp_length` values based on the overall mean.
-     ```
-      mean_person_emp_length = data['person_emp_length'].mean()
-      data['person_emp_length'].fillna(mean_person_emp_length, inplace=True)
-     ```
+Overview of Transformed Features
 
-2. **One-Hot Encoding (OHE):**
-   One-Hot-Encoding is a technique used to represent categorical variables as numerical values in a machine learning model. The following steps are taken:
-   - Apply OHE to categorical columns with more than 2 categories (`loan_intent`, `loan_grade`, `person_home_ownership`).
-     ```
-       data = pd.get_dummies(data,columns=['loan_intent','loan_grade','person_home_ownership'])
-     ```
-   - Apply OHE to the categorical column with only 2 categories (`cb_person_default_on_file`), dropping the first category to avoid multicollinearity.
-     ```
-       data = pd.get_dummies(data,columns=['cb_person_default_on_file'], drop_first= True)
-     ```
+#### Binary and Categorical Features (One-Hot Encoded):
+1. loan_status: The default status of the loan.
+is_homeowner: Indicator if the person owns a home.
+2. intent_*: Loan intent categories such as DEBTCONSOLIDATION, EDUCATION, etc., with binary values.
+loan_grade_encoded: Encoded loan grades.
+3. cb_person_default_on_file_encoded: Encoded indicator if the person has any defaults on file.
+4. Age Brackets:
+Brackets like age_bracket_26-30, age_bracket_31-35, etc., indicating age ranges.
+5. Income Brackets:
+Brackets like income_bracket_30k-60k, income_bracket_60k-90k, etc., indicating income ranges.
+6. Employment Length Brackets:
+Brackets like emp_length_bracket_2-5, emp_length_bracket_5-10, etc., indicating lengths of employment.
+#### Transformed Numerical Features:
+7. person_age_log: Log transformation of age.
+8. person_income_standardized: Standardized income.
+9. person_emp_length_standardized: Standardized employment length.
+10. loan_amnt_standardized: Standardized loan amount.
+11. loan_int_rate_log: Log transformation of interest rate.
+12. loan_percent_income_log: Log transformation of the percentage of income used for the loan.
+13. cb_person_cred_hist_length_log: Log transformation of credit history length.
 
-3. **Data Standardization:**
-   We preprocess numerical columns by removing outliers and applying log transformation based on insights from the exploratory data analysis.
-   - **Remove Outliers:** Identify and remove outliers to ensure a more normal distribution of data.
-     ```
-       column_no_outliers = data[column_name][data[column_name] < data[column_name].quantile(quantile)]
-     ```
-   - **Apply Log Transformation:** Apply log transformation to reduce skewness and make the data more normally distributed.
-     ```
-       column_log_transformed = np.log1p(column_no_outliers)
-     ```
+#### Updated Descriptive Statistics:
 
-### Resulting Dataset
-
-The resulting dataset contains 32,581 entries and 26 columns, with the following structure:
-
-| Column                          | Non-Null Count | Dtype   |
-|---------------------------------|----------------|---------|
-| `person_age`                    | 32581          | float64 |
-| `person_income`                 | 32581          | float64 |
-| `person_emp_length`             | 32581          | float64 |
-| `loan_amnt`                     | 32581          | float64 |
-| `loan_int_rate`                 | 32581          | float64 |
-| `loan_status`                   | 32581          | int64   |
-| `loan_percent_income`           | 32581          | float64 |
-| `cb_person_cred_hist_length`    | 32581          | float64 |
-| `loan_intent_DEBTCONSOLIDATION` | 32581          | bool    |
-| `loan_intent_EDUCATION`         | 32581          | bool    |
-| `loan_intent_HOMEIMPROVEMENT`   | 32581          | bool    |
-| `loan_intent_MEDICAL`           | 32581          | bool    |
-| `loan_intent_PERSONAL`          | 32581          | bool    |
-| `loan_intent_VENTURE`           | 32581          | bool    |
-| `loan_grade_A`                  | 32581          | bool    |
-| `loan_grade_B`                  | 32581          | bool    |
-| `loan_grade_C`                  | 32581          | bool    |
-| `loan_grade_D`                  | 32581          | bool    |
-| `loan_grade_E`                  | 32581          | bool    |
-| `loan_grade_F`                  | 32581          | bool    |
-| `loan_grade_G`                  | 32581          | bool    |
-| `person_home_ownership_MORTGAGE`| 32581          | bool    |
-| `person_home_ownership_OTHER`   | 32581          | bool    |
-| `person_home_ownership_OWN`     | 32581          | bool    |
-| `person_home_ownership_RENT`    | 32581          | bool    |
-| `cb_person_default_on_file_Y`   | 32581          | bool    |
+Numerical Transformed Features:
+* person_age_log:
+Mean: 3.337
+Std: 0.188
+Min/Max: 3.044 / 4.190
+* person_income_standardized:
+Mean: ~0 (standardized)
+Std: 1 (standardized)
+Min/Max: -1.178 / 37.577 (potential outliers)
+* person_emp_length_standardized:
+Mean: ~0 (standardized)
+Std: 1 (standardized)
+Min/Max: -1.203 / 8.357 (potential outliers)
+* loan_amnt_standardized:
+Mean: ~0 (standardized)
+Std: 1 (standardized)
+Min/Max: -1.438 / 4.020
+* loan_int_rate_log:
+Mean: 2.451
+Std: 0.268
+Min/Max: 1.859 / 3.187
+* loan_percent_income_log:
+Mean: 0.153
+Std: 0.088
+Min/Max: 0 / 0.604
+* cb_person_cred_hist_length_log:
+Mean: 1.770
+Std: 0.522
+Min/Max: 1.099 / 3.434
 
 The preprocessed dataset is saved as `processed_credit_risk_dataset.csv`.
 
 ## Model Training
 
-In the notebook `model_training.ipynb`, we train various machine learning models to predict the likelihood of a loan applicant defaulting. The dataset used for training is the preprocessed dataset saved during the data preprocessing step.
 
-### Reading the Dataset
-
-We start by reading the preprocessed dataset.
-````
-data = pd.read_csv("../data/processed/processed_credit_risk_dataset.csv")
-````
-
-### Splitting the Data
-
-The data is split into training and testing sets. Stratified sampling is used to handle the imbalance in the target labels, ensuring that the proportion of default and non-default cases is consistent across both sets.
-
-```
-y = data['loan_status'].to_numpy()
-X = data.drop('loan_status',axis = 1).to_numpy()
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y, random_state= 42)
-```
-
-### Metrics and Scoring
-
-We define a function to evaluate our models using precision, recall, and F1-score metrics. These metrics provide a comprehensive view of the model's performance:
-```
-from sklearn.metrics import precision_recall_fscore_support
-y_pred = model.predict(X_test)
-    metrics = precision_recall_fscore_support(y_test, y_pred, pos_label=1, average='binary')
-    
-    print('Confusion matrix)\n', confusion_matrix(y_test, y_pred))
-    print('Precision is {:0.2f} %'.format(metrics[0]*100))
-    print('Recall is {:0.2f} %'.format(metrics[1]*100))
-    print('Fscore is {:0.2f} %'.format(metrics[2]*100))
-```
-
-- **Precision:** The proportion of true positive results among the total predicted positives.
-- **Recall:** The proportion of true positive results among the total actual positives.
-- **F1-Score:** The harmonic mean of precision and recall, balancing the two metrics.
-
-### Summary of Models Used
-
-We trained several models, including:
-
-- **Random Forest**
-- **Decision Tree**
-- **Logistic Regression** (with and without increased iterations)
-- **K-Nearest Neighbors (KNN)**
-
-#### Performance Metrics
-
-**Precision:**
-
-- **Random Forest:** 97.70%
-- **Decision Tree:** 95.77%
-- **Logistic Regression with increased iterations:** 76.17%
-- **Logistic Regression:** 65.41%
-- **KNN:** 54.82%
-
-The Random Forest model has the highest precision, closely followed by the Decision Tree model.
-
-**Recall:**
-
-- **Random Forest:** 73.94%
-- **Decision Tree:** 73.83%
-- **Logistic Regression with increased iterations:** 54.14%
-- **Logistic Regression:** 28.42%
-- **KNN:** 27.52%
-
-The Random Forest model also has the highest recall, indicating it has the lowest false negative rate.
-
-**F1-Score:**
-
-- **Random Forest:** 84.18%
-- **Decision Tree:** 83.38%
-- **Logistic Regression with increased iterations:** 63.29%
-- **Logistic Regression:** 39.62%
-- **KNN:** 36.64%
-
-The Random Forest model achieves the highest F1-Score, which balances precision and recall effectively.
-
-### Conclusion
-
-Based on the precision, recall, and F1-Score metrics, the Random Forest model performs the best in predicting loan defaults. This model strikes a good balance between identifying positive cases (defaults) and minimizing false positives.
 
 For more details and the complete code, refer to the notebook `model_training.ipynb`.
 
 ### Team Videos
 
-1. [**Nestor Rojas**](https://youtu.be/iZWeZNim6cE)
-2. [**Andriana Olashyn**](https://youtu.be/GpnisgeQ_50?si=-YaykzW35M8FLgl9)
+1. [**Nestor Rojas**](https://youtu.be/78sXhYgv6Po)
+2. [**Andriana Olashyn**](https://youtu.be/sOKU9j1URjg?si=yqqBsf_dZJh915ch)
 3. [**Oleksandr Bratushchyk-Khoma**](https://youtu.be/W3-mOhDjcnE)
 4. [**Veronika Plosnak**](https://youtu.be/E3bTQjyBdrM)
